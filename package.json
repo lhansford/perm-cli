@@ -1,9 +1,11 @@
 {
   "name": "perm-cli",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Perm is a lightweight Personal Relationship Management system for use with Markdown",
   "main": "dist/index.js",
-  "bin": "dist/index.js",
+  "bin": {
+    "perm": "dist/index.js"
+  },
   "author": "Luke Hansford",
   "license": "MIT",
   "scripts": {
