@@ -3126,7 +3126,7 @@ const {
 } = commander;
 
 var name = "perm-cli";
-var version = "0.0.2";
+var version = "0.0.3";
 var description = "Perm is a lightweight Personal Relationship Management system for use with Markdown";
 
 var ansiStyles$1 = {exports: {}};
@@ -10098,8 +10098,14 @@ function due() {
     });
 }
 
+function list() {
+    getPeople().map((person) => console.log(person.name));
+}
+
 program.name(name).description(description).version(version);
-program.command('due')
+program
+    .command('due')
     .description("List all people who haven't been contacted within the specified frequency range") // TODO: write a better desc.
     .action(due);
+program.command('ls').alias('list').description('List all people').action(list);
 program.parse();
