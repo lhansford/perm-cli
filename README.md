@@ -25,6 +25,11 @@ export PERM_PEOPLE_DIR="/Users/$USER/Dropbox/People"
 
 `perm due` - List people who haven't been contacted in the specified time frame.
 
+## Philosophy
+
+TODO:
+
 ## Roadmap
 
 - List upcoming birthdays
+- Post-commit hook to build app or something similar
