@@ -4,7 +4,7 @@ created: 2021-01-24
 updated: 2021-01-24
 lastContact: 2022-01-24
 contactFrequency: 30 # How often you would like to contact this person, in days.
-birthDate: 2021-01-24
+birthDate: XXXX-01-24
 aliases: ["John D. Doe"]
 # You can also include any other attributes you'd like.
 email: "john@doe.com"

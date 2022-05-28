@@ -24,12 +24,26 @@ export PERM_PEOPLE_DIR="/Users/$USER/Dropbox/People"
 ## Usage
 
 `perm due` - List people who haven't been contacted in the specified time frame.
+`perm birthdays` / `perm bdays` - List upcoming birthdays.
+`perm list` / `perm ls` - List all people.
 
 ## Philosophy
 
 TODO:
 
+## Contributing
+
+Run locally using:
+
+`yarn start <YOUR_COMMAND>`
+
+To deploy, just update the version number and commit to `main`.
+
 ## Roadmap
 
-- List upcoming birthdays
+- Complete documentation
+- Add tests + coverage checks
+- Setup Github to protect branches
+- Setup proper release notes
+- Command to list people in a particular group/with a particular interest
 - Post-commit hook to build app or something similar
