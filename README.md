@@ -37,7 +37,8 @@ Run locally using:
 
 `yarn start <YOUR_COMMAND>`
 
-To deploy, just update the version number and commit to `main`.
+To deploy, just update the version number and commit to `main`. Make sure to run `yarn build` before
+commiting.
 
 ## Roadmap
 
