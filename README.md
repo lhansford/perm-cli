@@ -39,12 +39,3 @@ Run locally using:
 
 To deploy, just update the version number and commit to `main`. Make sure to run `yarn build` before
 commiting.
-
-## Roadmap
-
-- Complete documentation
-- Add tests + coverage checks
-- Setup Github to protect branches
-- Setup proper release notes
-- Command to list people in a particular group/with a particular interest
-- Post-commit hook to build app or something similar
