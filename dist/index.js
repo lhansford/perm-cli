@@ -3436,6 +3436,22 @@ function invariant(condition, message) {
     throw new Error(value);
 }
 
+function formatBirthDate(person) {
+    invariant(person.birthDate, 'birthDate is required');
+    console.log(person.birthDate);
+    const today = new Date();
+    const birthDay = typeof person.birthDate === 'string'
+        ? new Date(person.birthDate.toLowerCase().replace('xxxx', '1970'))
+        : person.birthDate;
+    if (birthDay.getMonth() <= today.getMonth() && birthDay.getDate() < today.getDate()) {
+        birthDay.setFullYear(today.getFullYear() + 1);
+    }
+    else {
+        birthDay.setFullYear(today.getFullYear());
+    }
+    return { person, birthDay };
+}
+
 var toString = Object.prototype.toString;
 
 var kindOf = function kindOf(val) {
@@ -8188,18 +8204,6 @@ function getPeople() {
     return getMarkdownFilesInDirectory(PEOPLE_DIR).map((file) => getAndParseMarkdownFile(require$$2.join(PEOPLE_DIR, file.name)));
 }
 
-function formatBirthDate(person) {
-    invariant(person.birthDate, 'birthDate is required');
-    const today = new Date();
-    const birthDay = new Date(person.birthDate.toLowerCase().replace('xxxx', '1970'));
-    if (birthDay.getMonth() <= today.getMonth() && birthDay.getDate() < today.getDate()) {
-        birthDay.setFullYear(today.getFullYear() + 1);
-    }
-    else {
-        birthDay.setFullYear(today.getFullYear());
-    }
-    return { person, birthDay };
-}
 function birthdays() {
     getPeople()
         .filter((p) => p.birthDate)

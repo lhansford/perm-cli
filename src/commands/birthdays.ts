@@ -1,22 +1,7 @@
 import { differenceInDays } from 'date-fns';
-import invariant from 'tiny-invariant';
 
-import { getPeople, Person } from '../utils/getPeople';
-
-function formatBirthDate(person: Person) {
-  invariant(person.birthDate, 'birthDate is required');
-
-  const today = new Date();
-  const birthDay = new Date(person.birthDate.toLowerCase().replace('xxxx', '1970'));
-
-  if (birthDay.getMonth() <= today.getMonth() && birthDay.getDate() < today.getDate()) {
-    birthDay.setFullYear(today.getFullYear() + 1);
-  } else {
-    birthDay.setFullYear(today.getFullYear());
-  }
-
-  return { person, birthDay };
-}
+import { formatBirthDate } from '../utils/formatBirthDate';
+import { getPeople } from '../utils/getPeople';
 
 export function birthdays(): void {
   getPeople()

@@ -6,11 +6,11 @@ import matter from 'gray-matter';
 import { PEOPLE_DIR } from '../constants';
 
 export interface Person {
-  created?: string; // YYYY-MM-DD
-  updated?: string; // YYYY-MM-DD
-  lastContact?: string; // YYYY-MM-DD
+  created?: Date; // YYYY-MM-DD
+  updated?: Date; // YYYY-MM-DD
+  lastContact?: Date; // YYYY-MM-DD
   contactFrequency?: number; // Days
-  birthDate?: string; // YYYY-MM-DD
+  birthDate?: Date | string; // YYYY-MM-DD
   aliases?: string[];
   name: string;
   content: string;
