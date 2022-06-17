@@ -3438,7 +3438,6 @@ function invariant(condition, message) {
 
 function formatBirthDate(person) {
     invariant(person.birthDate, 'birthDate is required');
-    console.log(person.birthDate);
     const today = new Date();
     const birthDay = typeof person.birthDate === 'string'
         ? new Date(person.birthDate.toLowerCase().replace('xxxx', '1970'))
@@ -10122,8 +10121,22 @@ function due() {
     });
 }
 
-function list() {
-    getPeople().map((person) => console.log(person.name));
+function list(_name, command) {
+    const { group, interest } = command.opts();
+    getPeople()
+        .filter((person) => {
+        if (group) {
+            return person.groups && person.groups.includes(group);
+        }
+        return true;
+    })
+        .filter((person) => {
+        if (interest) {
+            return person.interests && person.interests.includes(interest);
+        }
+        return true;
+    })
+        .map((person) => console.log(person.name));
 }
 
 program.name(name).description(description).version(version);
@@ -10134,7 +10147,13 @@ program
 program
     .command('birthdays')
     .alias('bdays')
-    .description("List the next N birthdays (default is 10).") // TODO: write a better desc.
+    .description('List the next N birthdays (default is 10).') // TODO: write a better desc.
     .action(birthdays);
-program.command('ls').alias('list').description('List all people').action(list);
+program
+    .command('ls')
+    .alias('list')
+    .description('List all people')
+    .option('-g, --group <groupName>', 'List people in a group')
+    .option('-i, --interest <groupName>', 'List people with an interest')
+    .action(list);
 program.parse();

@@ -10,6 +10,12 @@ aliases: ["Jane D. Doe"]
 email: "jane@doe.com"
 relationship: "Colleague"
 howWeMet: "I made her up for a coding project!"
+groups:
+  - Demo content
+  - Friends
+interests:
+  - plants
+  - product-management
 ---
 # Jane Doe
 

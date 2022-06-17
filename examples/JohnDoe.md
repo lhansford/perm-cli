@@ -9,7 +9,13 @@ aliases: ["John D. Doe"]
 # You can also include any other attributes you'd like.
 email: "john@doe.com"
 relationship: "Colleague"
-howWeMet: "I made her up for a coding project!"
+howWeMet: "I made him up for a coding project!"
+groups:
+  - Demo content
+  - Colleagues
+interests:
+  - travel
+  - music
 ---
 # John Doe
 

@@ -14,6 +14,8 @@ export interface Person {
   aliases?: string[];
   name: string;
   content: string;
+  groups?: string[];
+  interests?: string[];
   [key: string]: unknown;
 }
 

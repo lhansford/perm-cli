@@ -19,9 +19,15 @@ program
 program
   .command('birthdays')
   .alias('bdays')
-  .description("List the next N birthdays (default is 10).") // TODO: write a better desc.
+  .description('List the next N birthdays (default is 10).') // TODO: write a better desc.
   .action(birthdays);
 
-program.command('ls').alias('list').description('List all people').action(list);
+program
+  .command('ls')
+  .alias('list')
+  .description('List all people')
+  .option('-g, --group <groupName>', 'List people in a group')
+  .option('-i, --interest <groupName>', 'List people with an interest')
+  .action(list);
 
 program.parse();
