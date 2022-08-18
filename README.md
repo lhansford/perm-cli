@@ -41,7 +41,7 @@ Perm is intended as a set of utilities for use with Markdown files. Reading and 
 
 Run locally using:
 
-`yarn start <YOUR_COMMAND>`
+`npm run start <YOUR_COMMAND>`
 
-To deploy, just update the version number and commit to `main`. Make sure to run `yarn build` before
+To deploy, just update the version number and commit to `main`. Make sure to run `npm run build` before
 commiting.
