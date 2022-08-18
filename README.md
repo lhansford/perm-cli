@@ -43,5 +43,5 @@ Run locally using:
 
 `npm run start <YOUR_COMMAND>`
 
-To deploy, just update the version number and commit to `main`. Make sure to run `npm run build` before
-commiting.
+To create a release, update the version number and commit to `main`. Then create a release in Github
+(using the automated release notes).
