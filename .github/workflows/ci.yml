@@ -8,19 +8,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-
-    - name: Cache node modules
-      uses: actions/cache@v3.0.1
+    - uses: actions/setup-node@v3
       with:
-        path: node_modules
-        key: ${{ runner.OS }}-build-${{ hashFiles('**/yarn.lock') }}
-        restore-keys: |
-          ${{ runner.OS }}-build-${{ env.cache-name }}-
-          ${{ runner.OS }}-build-
-          ${{ runner.OS }}-
-
-    - name: Install packages
-      run: yarn
+        node-version: 16
+        cache: 'npm'
+    - run: npm ci
 
   lint:
     needs: install
@@ -28,19 +20,13 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-
-    - name: Cache node modules
-      uses: actions/cache@v3.0.1
+    - uses: actions/setup-node@v3
       with:
-        path: node_modules
-        key: ${{ runner.OS }}-build-${{ hashFiles('**/yarn.lock') }}
-        restore-keys: |
-          ${{ runner.OS }}-build-${{ env.cache-name }}-
-          ${{ runner.OS }}-build-
-          ${{ runner.OS }}-
+        node-version: 16
+        cache: 'npm'
+    - run: npm ci
 
-    - name: Run Linter
-      run: yarn lint
+    - run: npm run lint
 
   unit-test:
     needs: install
@@ -48,18 +34,26 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-
-    - name: Cache node modules
-      uses: actions/cache@v3.0.1
+    - uses: actions/setup-node@v3
       with:
-        path: node_modules
-        key: ${{ runner.OS }}-build-${{ hashFiles('**/yarn.lock') }}
-        restore-keys: |
-          ${{ runner.OS }}-build-${{ env.cache-name }}-
-          ${{ runner.OS }}-build-
-          ${{ runner.OS }}-
+        node-version: 16
+        cache: 'npm'
+    - run: npm ci
 
-    - name: Run tests
+    - run: npm run test
       env:
         CI: true
-      run: yarn test
+
+  build:
+    needs: install
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 16
+        cache: 'npm'
+    - run: npm ci
+
+    - run: npm run build
