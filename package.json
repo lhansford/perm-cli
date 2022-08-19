@@ -1,6 +1,6 @@
 {
   "name": "perm-cli",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Perm is a lightweight Personal Relationship Management system for use with Markdown",
   "main": "dist/index.js",
   "source": "src/index.ts",
@@ -36,5 +36,14 @@
     "date-fns": "^2.29.1",
     "gray-matter": "^4.0.3",
     "tiny-invariant": "^1.2.0"
+  },
+  "@parcel/transformer-js": {
+    "inlineFS": false,
+    "inlineEnvironment": false
+  },
+  "targets": {
+    "main": {
+      "context": "node"
+    }
   }
 }
