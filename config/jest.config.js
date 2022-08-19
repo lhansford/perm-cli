@@ -1,5 +1,5 @@
 /** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
-module.exports = {
+export default {
   preset: 'ts-jest',
   rootDir: './../src',
   testEnvironment: 'node',
@@ -14,7 +14,6 @@ module.exports = {
   },
   globals: {
     'ts-jest': {
-      // ts-jest configuration goes here
       tsconfig: {
         jsx: 'react',
       },
