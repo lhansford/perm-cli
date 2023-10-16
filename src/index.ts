@@ -11,6 +11,8 @@ verifyPeopleDirectory();
 
 program.name(name).description(description).version(version);
 
+program.option('--debug', 'Enable debug logging', false);
+
 program
   .command('due')
   .description("List all people who haven't been contacted within the specified frequency range") // TODO: write a better desc.
@@ -30,4 +32,4 @@ program
   .option('-i, --interest <groupName>', 'List people with an interest')
   .action(list);
 
-program.parse();
+program.parse(process.argv);
