@@ -1,9 +1,9 @@
-import invariant from 'tiny-invariant';
-
 import { Person } from './getPeople';
 
 export function formatBirthDate(person: Person) {
-  invariant(person.birthDate, 'birthDate is required');
+  if (!person.birthDate) {
+    throw new Error('birthDate is required');
+  }
 
   const today = new Date();
   const birthDay =

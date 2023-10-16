@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 import {program as $47BQW$program} from "commander";
 import {differenceInDays as $47BQW$differenceInDays, addDays as $47BQW$addDays} from "date-fns";
-import $47BQW$tinyinvariant from "tiny-invariant";
 import {readdirSync as $47BQW$readdirSync, readFileSync as $47BQW$readFileSync} from "fs";
 import {join as $47BQW$join} from "path";
 import $47BQW$graymatter from "gray-matter";
@@ -9,13 +8,12 @@ import $47BQW$chalk from "chalk";
 
 
 var $3647f841f639dcb9$exports = {};
-$3647f841f639dcb9$exports = JSON.parse('{"name":"perm-cli","version":"0.2.4","description":"Perm is a lightweight Personal Relationship Management system for use with Markdown","main":"dist/index.js","source":"src/index.ts","type":"module","bin":{"perm":"dist/index.js"},"author":"Luke Hansford","license":"MIT","scripts":{"build":"parcel build --no-source-maps","lint:fix":"npm run lint --fix","lint":"eslint src --ext .js,.ts","start":"npm run build && node dist/index.js","test:watch":"jest --watchAll","test":"jest --config ./config/jest.config.js"},"devDependencies":{"@parcel/packager-ts":"^2.7.0","@parcel/transformer-typescript-types":"^2.7.0","@types/inquirer":"^9.0.1","@types/jest":"^28.1.7","eslint-config-lukehansford-base":"^1.2.2","eslint-plugin-jest-formatting":"^3.1.0","jest":"^28.1.3","parcel":"^2.7.0","ts-jest":"^28.0.8","typescript":"^4.7.4"},"dependencies":{"chalk":"5.2.0","commander":"^9.4.0","date-fns":"^2.29.1","gray-matter":"^4.0.3","tiny-invariant":"^1.2.0"},"@parcel/transformer-js":{"inlineFS":false,"inlineEnvironment":false},"targets":{"main":{"context":"node"}}}');
-
+$3647f841f639dcb9$exports = JSON.parse('{"name":"perm-cli","version":"0.2.5","description":"Perm is a lightweight Personal Relationship Management system for use with Markdown","main":"dist/index.js","source":"src/index.ts","type":"module","bin":{"perm":"dist/index.js"},"author":"Luke Hansford","license":"MIT","scripts":{"build":"parcel build --no-source-maps","lint:fix":"npm run lint --fix","lint":"eslint src --ext .js,.ts","start":"npm run build && node dist/index.js","test:watch":"jest --watchAll","test":"jest --config ./config/jest.config.js"},"devDependencies":{"@parcel/packager-ts":"^2.7.0","@parcel/transformer-typescript-types":"^2.7.0","@types/inquirer":"^9.0.1","@types/jest":"^28.1.7","eslint-config-lukehansford-base":"^1.2.2","eslint-plugin-jest-formatting":"^3.1.0","jest":"^28.1.3","parcel":"^2.7.0","ts-jest":"^28.0.8","typescript":"^4.7.4"},"dependencies":{"chalk":"5.2.0","commander":"^9.4.0","date-fns":"^2.29.1","gray-matter":"^4.0.3"},"@parcel/transformer-js":{"inlineFS":false,"inlineEnvironment":false},"targets":{"main":{"context":"node"}}}');
 
 
 
 function $fda699075e262a94$export$4ff8436bc6d936d2(person) {
-    (0, $47BQW$tinyinvariant)(person.birthDate, "birthDate is required");
+    if (!person.birthDate) throw new Error("birthDate is required");
     const today = new Date();
     const birthDay = typeof person.birthDate === "string" ? new Date(person.birthDate.toLowerCase().replace("xxxx", "1970")) : person.birthDate;
     if (birthDay.getMonth() <= today.getMonth() && birthDay.getDate() < today.getDate()) birthDay.setFullYear(today.getFullYear() + 1);
@@ -85,9 +83,10 @@ function $07df2b67c45349e5$export$572ab32d2956f8e3() {
 
 
 
-function $450ec37c6fb6b5cf$var$getDaysOverdue({ lastContact: lastContact , contactFrequency: contactFrequency  }) {
-    (0, $47BQW$tinyinvariant)(lastContact && contactFrequency);
-    return (0, $47BQW$differenceInDays)(new Date(), (0, $47BQW$addDays)(new Date(lastContact), contactFrequency));
+function $450ec37c6fb6b5cf$var$getDaysOverdue({ lastContact: lastContact , contactFrequency: contactFrequency , created: created , name: name  }) {
+    (0, $298b4ce85aa0d814$export$bef1f36f5486a6a3)(`Getting days overdue for ${name}`);
+    if (!contactFrequency) throw new Error("Only users with a contact frequency should be passed to this function.");
+    return (0, $47BQW$differenceInDays)(new Date(), (0, $47BQW$addDays)(new Date(lastContact || created || "1970-01-01"), contactFrequency));
 }
 function $450ec37c6fb6b5cf$export$bdb193b58d921ecb() {
     const today = new Date();
