@@ -1,13 +1,20 @@
 import chalk from 'chalk';
 import { addDays, differenceInDays } from 'date-fns';
-import invariant from 'tiny-invariant';
 
 import { getPeople, Person } from '../utils/getPeople';
+import { log } from '../utils/log';
 
-function getDaysOverdue({ lastContact, contactFrequency }: Person): number {
-  invariant(lastContact && contactFrequency);
+function getDaysOverdue({ lastContact, contactFrequency, created, name }: Person): number {
+  log(`Getting days overdue for ${name}`);
 
-  return differenceInDays(new Date(), addDays(new Date(lastContact), contactFrequency));
+  if (!contactFrequency) {
+    throw new Error('Only users with a contact frequency should be passed to this function.');
+  }
+
+  return differenceInDays(
+    new Date(),
+    addDays(new Date(lastContact || created || '1970-01-01'), contactFrequency),
+  );
 }
 
 export function due() {
