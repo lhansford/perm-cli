@@ -5,6 +5,8 @@ import matter from 'gray-matter';
 
 import { PEOPLE_DIR } from '../constants';
 
+import { log } from './log';
+
 export interface Person {
   created?: Date; // YYYY-MM-DD
   updated?: Date; // YYYY-MM-DD
@@ -36,6 +38,7 @@ function getMarkdownFilesInDirectory(directory: string): ReturnType<typeof readd
 }
 
 function getAndParseMarkdownFile(path: string): Person {
+  log(`Parsing ${path}`);
   const contents = readFileSync(path, { encoding: 'utf8' });
   const { content, data } = matter(contents);
   const [name, contentWithoutTitle] = splitTitleAndContent(content);
@@ -50,6 +53,7 @@ function getAndParseMarkdownFile(path: string): Person {
 }
 
 export function getPeople(): Person[] {
+  log(`Getting people from ${PEOPLE_DIR}`);
   return getMarkdownFilesInDirectory(PEOPLE_DIR).map((file) =>
     getAndParseMarkdownFile(join(PEOPLE_DIR, file.name)),
   );

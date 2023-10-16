@@ -9,7 +9,7 @@ import $47BQW$chalk from "chalk";
 
 
 var $3647f841f639dcb9$exports = {};
-$3647f841f639dcb9$exports = JSON.parse('{"name":"perm-cli","version":"0.2.2","description":"Perm is a lightweight Personal Relationship Management system for use with Markdown","main":"dist/index.js","source":"src/index.ts","type":"module","bin":{"perm":"dist/index.js"},"author":"Luke Hansford","license":"MIT","scripts":{"build":"parcel build --no-source-maps","lint:fix":"npm run lint --fix","lint":"eslint src --ext .js,.ts","start":"npm run build && node dist/index.js","test:watch":"jest --watchAll","test":"jest --config ./config/jest.config.js"},"devDependencies":{"@parcel/packager-ts":"^2.7.0","@parcel/transformer-typescript-types":"^2.7.0","@types/inquirer":"^9.0.1","@types/jest":"^28.1.7","eslint-config-lukehansford-base":"^1.2.2","eslint-plugin-jest-formatting":"^3.1.0","jest":"^28.1.3","parcel":"^2.7.0","ts-jest":"^28.0.8","typescript":"^4.7.4"},"dependencies":{"chalk":"5.0.1","commander":"^9.4.0","date-fns":"^2.29.1","gray-matter":"^4.0.3","tiny-invariant":"^1.2.0"},"@parcel/transformer-js":{"inlineFS":false,"inlineEnvironment":false},"targets":{"main":{"context":"node"}}}');
+$3647f841f639dcb9$exports = JSON.parse('{"name":"perm-cli","version":"0.2.4","description":"Perm is a lightweight Personal Relationship Management system for use with Markdown","main":"dist/index.js","source":"src/index.ts","type":"module","bin":{"perm":"dist/index.js"},"author":"Luke Hansford","license":"MIT","scripts":{"build":"parcel build --no-source-maps","lint:fix":"npm run lint --fix","lint":"eslint src --ext .js,.ts","start":"npm run build && node dist/index.js","test:watch":"jest --watchAll","test":"jest --config ./config/jest.config.js"},"devDependencies":{"@parcel/packager-ts":"^2.7.0","@parcel/transformer-typescript-types":"^2.7.0","@types/inquirer":"^9.0.1","@types/jest":"^28.1.7","eslint-config-lukehansford-base":"^1.2.2","eslint-plugin-jest-formatting":"^3.1.0","jest":"^28.1.3","parcel":"^2.7.0","ts-jest":"^28.0.8","typescript":"^4.7.4"},"dependencies":{"chalk":"5.0.1","commander":"^9.4.0","date-fns":"^2.29.1","gray-matter":"^4.0.3","tiny-invariant":"^1.2.0"},"@parcel/transformer-js":{"inlineFS":false,"inlineEnvironment":false},"targets":{"main":{"context":"node"}}}');
 
 
 
@@ -33,6 +33,12 @@ function $fda699075e262a94$export$4ff8436bc6d936d2(person) {
 const $ae6ef0a8de332461$export$ba6483870cd55d63 = process.env.PERM_PEOPLE_DIR || "./.perm/people";
 
 
+
+function $298b4ce85aa0d814$export$bef1f36f5486a6a3(message) {
+    if ((0, $47BQW$program).opts().debug) console.log(message);
+}
+
+
 function $361f475d4079aece$var$splitTitleAndContent(content) {
     const lines = content.split("\n");
     const index = lines.findIndex((l)=>l.startsWith("# "));
@@ -51,6 +57,7 @@ function $361f475d4079aece$var$getMarkdownFilesInDirectory(directory) {
     return files.filter((result)=>!result.isDirectory() && result.name.endsWith(".md"));
 }
 function $361f475d4079aece$var$getAndParseMarkdownFile(path) {
+    (0, $298b4ce85aa0d814$export$bef1f36f5486a6a3)(`Parsing ${path}`);
     const contents = (0, $47BQW$readFileSync)(path, {
         encoding: "utf8"
     });
@@ -64,6 +71,7 @@ function $361f475d4079aece$var$getAndParseMarkdownFile(path) {
     };
 }
 function $361f475d4079aece$export$b9c97d5330cbe844() {
+    (0, $298b4ce85aa0d814$export$bef1f36f5486a6a3)(`Getting people from ${(0, $ae6ef0a8de332461$export$ba6483870cd55d63)}`);
     return $361f475d4079aece$var$getMarkdownFilesInDirectory((0, $ae6ef0a8de332461$export$ba6483870cd55d63)).map((file)=>$361f475d4079aece$var$getAndParseMarkdownFile((0, $47BQW$join)((0, $ae6ef0a8de332461$export$ba6483870cd55d63), file.name)));
 }
 
@@ -119,11 +127,12 @@ function $0d76d4e293adcbb1$export$888e7c6a16f38cd() {
 
 (0, $0d76d4e293adcbb1$export$888e7c6a16f38cd)();
 (0, $47BQW$program).name((0, $3647f841f639dcb9$exports.name)).description((0, $3647f841f639dcb9$exports.description)).version((0, $3647f841f639dcb9$exports.version));
+(0, $47BQW$program).option("--debug", "Enable debug logging", false);
 (0, $47BQW$program).command("due").description("List all people who haven't been contacted within the specified frequency range") // TODO: write a better desc.
 .action((0, $450ec37c6fb6b5cf$export$bdb193b58d921ecb));
 (0, $47BQW$program).command("birthdays").alias("bdays").description("List the next N birthdays (default is 10).") // TODO: write a better desc.
 .action((0, $07df2b67c45349e5$export$572ab32d2956f8e3));
 (0, $47BQW$program).command("ls").alias("list").description("List all people").option("-g, --group <groupName>", "List people in a group").option("-i, --interest <groupName>", "List people with an interest").action((0, $7de76989d1bfdab9$export$8837f4fc672e936d));
-(0, $47BQW$program).parse();
+(0, $47BQW$program).parse(process.argv);
 
 
